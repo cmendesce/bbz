@@ -1,0 +1,31 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    title BBZ News
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(href='https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css', rel='stylesheet')
+    style(type='text/css').
+      body {
+        padding-top: 3rem;
+      }
+      .starter-template {
+        padding: 3rem 1.5rem;
+        text-align: justify;
+      }
+      h1, li {
+        text-transform: uppercase
+      }
+  body
+    nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+      a.navbar-brand(href="#") BBZ News
+      div.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href="/news") Latest News
+    
+    main.container
+      div.starter-template
+        block content

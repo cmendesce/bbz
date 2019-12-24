@@ -1,0 +1,9 @@
+extends layout.pug
+block content
+  h1= model.title
+  p.lead!= model.body
+  hr
+  each tag in model.tags.split(',')
+    span.badge.badge-info.mr-2= tag 
+  hr
+  //-- test if mode is high, low or text

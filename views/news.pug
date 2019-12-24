@@ -1,0 +1,10 @@
+extends layout.pug
+block content
+  h1. 
+    20 latest breaking news
+  ul.list-group
+    each item in news
+      li.list-group-item
+        a.mr-2(href='details/' + item.id)= item.title
+        each tag in item.tags.split(',').slice(0, 5)
+          span.badge.badge-info.mr-2= tag 
