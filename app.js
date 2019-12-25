@@ -97,11 +97,6 @@ function register(req, res, status) {
 }
 
 app.get('/news', function (req, res) {
-  const responseTimeInMs = Date.now() - res.locals.startEpoch;
-  httpRequestDurationMicroseconds
-    .labels(req.method, req.route.path, res.statusCode)
-    .observe(responseTimeInMs);
-
   dbClient.query('SELECT id, title, body, tags FROM news ORDER BY RANDOM() LIMIT 20', [], function(err, result) {
     if (err) {
       console.log(err);
