@@ -28,4 +28,12 @@ html(lang='en')
     
     main.container
       div.starter-template
+        if mode == 'high'
+          div.alert.alert-info BBZ is running in HIGH mode
+        
+        if mode == 'low'
+          div.alert.alert-warning BBZ is running in LOW mode
+        
+        if mode == 'text'
+          div.alert.alert-dark BBZ is running in TEXT mode
         block content

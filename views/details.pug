@@ -6,4 +6,5 @@ block content
   each tag in model.tags.split(',')
     span.badge.badge-info.mr-2= tag 
   hr
-  //-- test if mode is high, low or text
+  each img in images
+    img(src=img, class="img-thumbnail rounded mr-1", style="width:350px; height:350px;")

@@ -2,7 +2,7 @@ import json
 import csv
 
 csv_file = 'BBC news dataset.csv'
-sql_file = 'news.sql'
+sql_file = 'data.sql'
 
 
 data = []
@@ -18,7 +18,7 @@ with open(csv_file) as f:
     body = body.join(desc[1:])
 
     data.append(
-      'insert into news (id, title, body, tags) values ({}, "{}", "{}", "{}");'.format(id, title, body, tags)
+      "INSERT INTO news VALUES ({}, '{}', '{}', '{}');".format(id, title, body, tags)
     )
     id = id + 1
 
