@@ -6,17 +6,22 @@ const Prometheus = require('prom-client');
 const http = require('http');
 
 let dbClient = null;
+let connectionString = '';
 
-const connInfo = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'postgres',
-  port: process.env.DB_PORT || 5432,
-  password: process.env.DB_PASSWORD || 'postgres',
-  database: process.env.DB_NAMES || 'bbz'
-};
-
+if (process.env.DATABASE_URL) {
+  connectionString = process.env.DATABASE_URL;
+} else {
+  const connInfo = {
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'postgres',
+    port: process.env.DB_PORT || 5432,
+    password: process.env.DB_PASSWORD || 'postgres',
+    database: process.env.DB_NAMES || 'bbz'
+  };
+  connectionString = `postgres://${connInfo.user}:${connInfo.password}@${connInfo.host}:${connInfo.port}/${connInfo.database}`;
+}
 var pool = new pg.Pool({
-  connectionString: `postgres://${connInfo.user}:${connInfo.password}@${connInfo.host}:${connInfo.port}/${connInfo.database}`
+  connectionString: connectionString
 });
 
 async.retry(
