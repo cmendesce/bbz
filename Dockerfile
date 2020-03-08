@@ -5,7 +5,7 @@ COPY package.json ./
 ARG BBZ_MODE
 ENV MODE=$BBZ_MODE
 ENV NODE_ENV='production'
-
+ENV PORT=4000
 RUN npm install --production
 
 COPY ./views ./views

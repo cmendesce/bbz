@@ -1,10 +1,34 @@
 version: '3.7'
 
 services:
-  bbz:
+  bbz-text:
     image: bbz:text
     ports:
       - 4000:4000
+    environment:
+      PGPORT: 5432
+      PGDATABASE: bbz
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGHOST: db
+    depends_on:
+      - db
+  bbz-low:
+    image: cmendes/bbz:low
+    ports:
+      - 4001:4000
+    environment:
+      PGPORT: 5432
+      PGDATABASE: bbz
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGHOST: db
+    depends_on:
+      - db
+  bbz-high:
+    image: cmendes/bbz:high
+    ports:
+      - 4002:4000
     environment:
       PGPORT: 5432
       PGDATABASE: bbz
@@ -24,3 +48,19 @@ services:
     environment:
       POSTGRES_DB: bbz
       POSTGRES_PASSWORD: postgres
+  locust:
+    image: 'grubykarol/locust:0.13.5-python3.8-alpine3.11'
+    container_name: locust
+    hostname: locust
+    ports:
+     - '8089:8089'
+    environment:
+      ATTACKED_HOST: http://bbz-text:8089
+      LOCUST_MODE: standalone
+      NO_PROXY: standalone
+      TASK_DELAY_FROM: 5
+      TASK_DELAY_TO: 30
+      QUIET_MODE: '${QUIET_MODE:-false}'
+      LOCUST_OPTS: '--web-port 8089'
+    volumes:
+      - ./test-scripts:/locust
