@@ -9,7 +9,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "4.17.1",
+    "express": "4.17.3",
     "pg": "^7.15.1",
     "prom-client": "^11.5.3",
     "pug": "^2.0.4"
